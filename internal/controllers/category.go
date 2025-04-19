@@ -9,12 +9,18 @@ func (h *ApiHandler) CreateCategory(c *gin.Context) {
 	var category models.Categories
 
 	if err := c.ShouldBindJSON(&category); err != nil {
-		c.JSON(400, gin.H{"error": "Invalid input"})
+		c.JSON(400, gin.H{
+			"error":   "Invalid request body",
+			"details": err.Error(),
+		})
 		return
 	}
 
 	if err := h.svc.CreateCategory(category.Name); err != nil {
-		c.JSON(500, gin.H{"error": "Failed to create category"})
+		c.JSON(500, gin.H{
+			"error":   "Failed to create category",
+			"details": err.Error(),
+		})
 		return
 	}
 
@@ -24,7 +30,10 @@ func (h *ApiHandler) CreateCategory(c *gin.Context) {
 func (h *ApiHandler) GetCategories(c *gin.Context) {
 	categories, err := h.svc.GetCategories()
 	if err != nil {
-		c.JSON(500, gin.H{"error": "Failed to get categories"})
+		c.JSON(500, gin.H{
+			"error":   "Failed to get categories",
+			"details": err.Error(),
+		})
 		return
 	}
 

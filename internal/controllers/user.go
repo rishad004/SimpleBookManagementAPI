@@ -9,28 +9,40 @@ func (h *ApiHandler) UserRegister(c *gin.Context) {
 	var user models.Users
 
 	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(400, gin.H{"error": "Invalid input"})
+		c.JSON(400, gin.H{
+			"error":   "Invalid request body",
+			"details": err.Error(),
+		})
 		return
 	}
 
 	if err := h.svc.UserRegister(user.Username, user.Password); err != nil {
-		c.JSON(500, gin.H{"error": "Failed to register user"})
+		c.JSON(500, gin.H{
+			"error":   "Failed to register user",
+			"details": err.Error(),
+		})
 		return
 	}
 
-	c.JSON(200, gin.H{"message": "User registered successfully"})
+	c.JSON(201, gin.H{"message": "User registered successfully"})
 
 }
 
 func (h *ApiHandler) UserLogin(c *gin.Context) {
 	var user models.Users
 	if err := c.ShouldBindJSON(&user); err != nil {
-		c.JSON(400, gin.H{"error": "Invalid input"})
+		c.JSON(400, gin.H{
+			"error":   "Invalid request body",
+			"details": err.Error(),
+		})
 		return
 	}
 	token, err := h.svc.UserLogin(user.Username, user.Password)
 	if err != nil {
-		c.JSON(401, gin.H{"error": "Invalid username or password"})
+		c.JSON(401, gin.H{
+			"error":   "Invalid username or password",
+			"details": err.Error(),
+		})
 		return
 	}
 	c.JSON(200, gin.H{"message": "User logged in successfully",
