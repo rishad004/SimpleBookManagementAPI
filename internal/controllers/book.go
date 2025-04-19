@@ -25,8 +25,9 @@ func (h *ApiHandler) CreateBook(c *gin.Context) {
 
 func (h *ApiHandler) GetBooks(c *gin.Context) {
 	title := c.Query("title")
+	category := c.Query("category")
 
-	books, err := h.svc.GetBooks(title)
+	books, err := h.svc.GetBooks(title, category)
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to get books"})
 		return

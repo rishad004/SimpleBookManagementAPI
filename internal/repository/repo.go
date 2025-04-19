@@ -62,11 +62,25 @@ func (r *repo) CheckCategory(category string) error {
 	return nil
 }
 
-func (r *repo) GetBooks(title string) ([]models.Books, error) {
+func (r *repo) GetBooks(title, category string) ([]models.Books, error) {
 	var books []models.Books
+
+	if title != "" && category != "" {
+		if err := r.db.Where("title = ? AND category = ?", title, category).Find(&books).Error; err != nil {
+			return nil, err
+		}
+		return books, nil
+	}
 
 	if title != "" {
 		if err := r.db.Where("title = ?", title).Find(&books).Error; err != nil {
+			return nil, err
+		}
+		return books, nil
+	}
+
+	if category != "" {
+		if err := r.db.Where("category = ?", category).Find(&books).Error; err != nil {
 			return nil, err
 		}
 		return books, nil
@@ -125,15 +139,8 @@ func (r *repo) CreateCategory(category string) error {
 	return nil
 }
 
-func (r *repo) GetCategories(category string) ([]models.Categories, error) {
+func (r *repo) GetCategories() ([]models.Categories, error) {
 	var categories []models.Categories
-
-	if category != "" {
-		if err := r.db.Where("name = ?", category).Find(&categories).Error; err != nil {
-			return nil, err
-		}
-		return categories, nil
-	}
 
 	if err := r.db.Find(&categories).Error; err != nil {
 		return nil, err

@@ -22,9 +22,7 @@ func (h *ApiHandler) CreateCategory(c *gin.Context) {
 }
 
 func (h *ApiHandler) GetCategories(c *gin.Context) {
-	category := c.Query("category")
-
-	categories, err := h.svc.GetCategories(category)
+	categories, err := h.svc.GetCategories()
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Failed to get categories"})
 		return

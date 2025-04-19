@@ -10,11 +10,11 @@ type Repo interface {
 	UserLogin(username string, password string) (string, error)
 	CreateBook(bookName string, author string, category string) error
 	CheckCategory(category string) error
-	GetBooks(title string) ([]models.Books, error)
+	GetBooks(title, category string) ([]models.Books, error)
 	UpdateBook(id int, bookName string, author string, category string) error
 	DeleteBook(id int) error
 	CreateCategory(category string) error
-	GetCategories(category string) ([]models.Categories, error)
+	GetCategories() ([]models.Categories, error)
 }
 
 type repo struct {

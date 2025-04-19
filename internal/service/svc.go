@@ -31,8 +31,8 @@ func (s *svc) CreateBook(bookName string, author string, category string) error 
 	return nil
 }
 
-func (s *svc) GetBooks(title string) ([]models.Books, error) {
-	books, err := s.repo.GetBooks(title)
+func (s *svc) GetBooks(title, category string) ([]models.Books, error) {
+	books, err := s.repo.GetBooks(title, category)
 	if err != nil {
 		return nil, err
 	}
@@ -68,8 +68,8 @@ func (s *svc) CreateCategory(category string) error {
 	return nil
 }
 
-func (s *svc) GetCategories(category string) ([]models.Categories, error) {
-	categories, err := s.repo.GetCategories(category)
+func (s *svc) GetCategories() ([]models.Categories, error) {
+	categories, err := s.repo.GetCategories()
 	if err != nil {
 		return nil, err
 	}
