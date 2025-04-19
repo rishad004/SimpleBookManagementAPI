@@ -122,6 +122,6 @@ Create a book (with JWT):
 ```bash
 curl -X POST http://localhost:8080/books \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
+  -H "Authorization: YOUR_JWT_TOKEN" \
   -d '{"title":"SampleBook", "author":"JohnDoe", "category":"Fantasy"}'
 ```
