@@ -86,7 +86,7 @@ A RESTful API service built with Golang for managing books and categories with u
 
 ## Database Setup
 
-The application uses SQLite and will automatically create a database file (`main.db`) inside the folder called database on first run.
+The application uses SQLite and will automatically create a database file (`main.db`) inside the folder called `database` on first run.
 
 ## Sample Requests
 
