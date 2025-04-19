@@ -100,7 +100,7 @@ The application uses SQLite and will automatically create a database file (`main
 | Variable     | Required | Description                          |
 |--------------|----------|--------------------------------------|
 | PORT         | Yes      | Port for the server to listen on     |
-| SECRET_KEY   | Yes      | Secret key for JWT token generation  
+| SECRETKEY    | Yes      | Secret key for JWT token generation  
 
 ## Sample Requests
 
