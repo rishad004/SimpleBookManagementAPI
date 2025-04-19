@@ -15,7 +15,7 @@ A RESTful API service built with Golang for managing books and categories with u
 
 - Go (1.24.1)
 - Gin Web Framework
-- GORM
+- GORM ORM
 - SQLite
 - JWT for authentication
 - Bcrypt for password hashing
@@ -43,7 +43,7 @@ A RESTful API service built with Golang for managing books and categories with u
 ### Categories
 
 - `GET /categories` - List all categories
-- `POST /categories` - Create a new category
+- `POST /categories` - Create a new category (requires authentication)
   ```json
   {
     "name": "string"
@@ -52,7 +52,7 @@ A RESTful API service built with Golang for managing books and categories with u
 
 ### Books
 
-- `GET /books` - List all books (optional query parameters: `?title=SampleBook` or `?category=Fanatsy`)
+- `GET /books` - List all books (optional query parameters: `?title=SimpleBook` or `?category=Fantasy`)
 - `POST /books` - Create a new book (requires authentication)
   ```json
   {
@@ -77,17 +77,30 @@ A RESTful API service built with Golang for managing books and categories with u
    go mod tidy
    ```
 
-3. Run the application:
+3. Create a `.env` file in the root directory with the following variables:
+   ```env
+   PORT = :8080
+   SECRET_KEY = your_strong_jwt_secret_key_here
+   ```
+4. Create a folder called `database` in the root directory
+
+5. Run the application:
    ```bash
    go run main.go
    ```
-4. Create a folder called `database`
 
-5. The API will be available at `http://localhost:8080`
+6. The API will be available at `http://localhost:8080` (or your specified PORT)
 
 ## Database Setup
 
-The application uses SQLite and will automatically create a database file (`main.db`) inside the folder called `database` on first run.
+The application uses SQLite and will automatically create a database file (`main.db`) inside `databse` folder on first run.
+
+## Environment Variables
+
+| Variable     | Required | Description                          |
+|--------------|----------|--------------------------------------|
+| PORT         | Yes      | Port for the server to listen on     |
+| SECRET_KEY   | Yes      | Secret key for JWT token generation  |
 
 ## Sample Requests
 
@@ -110,5 +123,5 @@ Create a book (with JWT):
 curl -X POST http://localhost:8080/books \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -d '{"title":"SampleBook", "author":"John Doe", "category":"Fantasy"}'
+  -d '{"title":"SampleBook", "author":"JohnDoe", "category":"Fantasy"}'
 ```
