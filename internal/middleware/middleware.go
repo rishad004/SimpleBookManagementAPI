@@ -10,7 +10,7 @@ import (
 func MiddleWare(c *gin.Context) {
 	token := c.GetHeader("Authorization")
 	if token == "" {
-		c.JSON(401, gin.H{"error": "No authorization header provided"})
+		c.JSON(401, gin.H{"error": "Unauthorized"})
 		c.Abort()
 		return
 	}
@@ -21,7 +21,7 @@ func MiddleWare(c *gin.Context) {
 	})
 
 	if err != nil || !tkn.Valid {
-		c.JSON(401, gin.H{"error": "Invalid token"})
+		c.JSON(401, gin.H{"error": "Unauthorized"})
 		c.Abort()
 		return
 	}
