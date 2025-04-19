@@ -81,8 +81,9 @@ A RESTful API service built with Golang for managing books and categories with u
    ```bash
    go run main.go
    ```
+4. Create a folder called `database`
 
-4. The API will be available at `http://localhost:8080`
+5. The API will be available at `http://localhost:8080`
 
 ## Database Setup
 
