@@ -1,4 +1,3 @@
-```markdown
 # Simple Book Management API
 
 A RESTful API service built with Golang for managing books and categories with user authentication.
